@@ -21,7 +21,7 @@ func (c App) Index() revel.Result {
 
 	//db, err := gorm.Open("mysql", "root:root@/db_gkdemy?charset=utf8&parseTime=True&loc=Local")
 
-	db, err := gorm.Open("mysql", "gkdemy_db_golang:LaFuq*$5_Y&2P_C@tcp(127.0.0.1:9192)/gkdemy_db?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "gkdemy_db_golang:LaFuq*$5_Y&2P_C@(localhost:9192)/gkdemy_db?charset=utf8&parseTime=True&loc=Local")
 
 	defer db.Close()
 
