@@ -9,7 +9,7 @@ module:testrunner
 
 GET     /                                       App.Index
 
-GET    /store                                   App.Store
+GET    /quiz                                    App.Quiz
 
 
 # Ignore favicon requests
