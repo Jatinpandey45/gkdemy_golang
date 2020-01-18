@@ -11,6 +11,8 @@ GET     /post                                       App.Index
 
 GET     /quiz                                       App.Quiz
 
+GET    /category                                    Category.Index
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
