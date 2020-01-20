@@ -29,6 +29,7 @@ func (c App) Index() revel.Result {
 	c.Params.Query = c.Request.URL.Query()
 
 	var page int
+
 	var count int64
 
 	c.Params.Bind(&page, "page")
@@ -58,7 +59,36 @@ func (c App) Quiz() revel.Result {
 
 	var quiz []models.Quiz
 
-	var records = c.DB.Preload("Category").Find(&quiz)
+	pageLimit := 20
 
-	return c.RenderJSON(records)
+	pageOffset := 0
+
+	c.Params.Query = c.Request.URL.Query()
+
+	var page int
+
+	var count int64
+
+	c.Params.Bind(&page, "page")
+
+	pageOffset = (page - 1) * pageLimit
+
+	fmt.Println(pageOffset)
+
+	var returnResult = make(map[string]interface{})
+
+	var records = c.DB.Preload("Category").Limit(pageLimit).Offset(pageOffset).Find(&quiz)
+
+	c.DB.Table("gk_quiz").Count(&count)
+
+	returnResult["data"] = records.Value
+	returnResult["total"] = count
+
+	if page == 0 {
+		page = 1
+	}
+
+	returnResult["page"] = page
+
+	return c.RenderJSON(returnResult)
 }
